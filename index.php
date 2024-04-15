@@ -1,17 +1,5 @@
 <?php
-    $hostname = 'localhost';
-    $username = 'root'; 
-    $password = ''; 
-    $database = 'gestione_libreria';
-
-    $conn = mysqli_connect($hostname, $username, $password, $database);
-
-    if ($conn === false) {
-        die("Errore di connessione al database: " . mysqli_connect_error());
-    }
-
-    $sql = "SELECT * FROM libri";
-    $result = mysqli_query($conn, $sql);
+include __DIR__ . '/includes/db.php';
 ?>
 
 <!DOCTYPE html>
@@ -28,10 +16,13 @@
         <h2 class="mb-3">Libri disponibili</h2>
         <ul class="list-group mb-5">
             <?php
+            $sql = "SELECT * FROM libri";
+            $result = mysqli_query($conn, $sql);
+
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<li class='list-group-item'>
                         {$row['titolo']} di {$row['autore']} ({$row['anno_pubblicazione']}) - {$row['genere']}
-                        <form action='elimina_libro.php' method='post' style='display: inline;'> 
+                        <form action='delete_book.php' method='post' style='display: inline;'> 
                             <input type='hidden' name='id' value='{$row['id']}'> 
                             <button type='submit' class='btn btn-danger btn-sm ms-2'>Elimina</button>
                         </form>
@@ -42,7 +33,7 @@
             ?>
         </ul>
         <h2 class="mb-3">Aggiungi un nuovo libro</h2>
-        <form action="aggiungi_libro.php" method="post" class="mb-4">
+        <form action="add_book.php" method="post" class="mb-4">
             <div class="mb-3">
                 <label for="titolo" class="form-label">Titolo</label>
                 <input type="text" class="form-control" id="titolo" name="titolo" required>
