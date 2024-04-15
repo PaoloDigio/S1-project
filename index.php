@@ -22,6 +22,7 @@ include __DIR__ . '/includes/db.php';
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<li class='list-group-item'>
                         {$row['titolo']} di {$row['autore']} ({$row['anno_pubblicazione']}) - {$row['genere']}
+                        <a href='edit_book.php?id={$row['id']}' class='btn btn-primary btn-sm ms-2'>Modifica</a>
                         <form action='delete_book.php' method='post' style='display: inline;'> 
                             <input type='hidden' name='id' value='{$row['id']}'> 
                             <button type='submit' class='btn btn-danger btn-sm ms-2'>Elimina</button>
@@ -50,7 +51,7 @@ include __DIR__ . '/includes/db.php';
                 <label for="genere" class="form-label">Genere</label>
                 <input type="text" class="form-control" id="genere" name="genere" required>
             </div>
-            <button type="submit" class="btn btn-primary">Aggiungi libro</button>
+            <button type="submit" class="btn btn-success">Aggiungi libro</button>
         </form>
     </div>
 </body>
