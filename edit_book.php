@@ -16,11 +16,11 @@ if (isset($_GET['id'])) {
         $anno = $row['anno_pubblicazione'];
         $genere = $row['genere'];
     } else {
-        echo "Nessun libro trovato con l'ID specificato.";
+        echo "Nessun libro trovato.";
         exit;
     }
 } else {
-    echo "ID del libro non specificato.";
+    echo "Errore";
     exit;
 }
 
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: index.php");
         exit;
     } else {
-        echo "Errore nell'aggiornamento dei dettagli del libro: " . mysqli_error($conn);
+        echo "Errore nel salvataggio dei dettagli: " . mysqli_error($conn);
     }
 }
 
